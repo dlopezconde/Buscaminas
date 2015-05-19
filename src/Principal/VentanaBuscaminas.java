@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  *
- * @author Jorge Cisneros
+ * @author Javier González
  */
 public class VentanaBuscaminas extends javax.swing.JFrame {
 
@@ -28,7 +28,7 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
        int c = r.nextInt(columnas);
        
        arrayBotones[f][c].bomba = 1;
-       arrayBotones[f][c].setText("B");
+       //arrayBotones[f][c].setText("B");
     }
     
     //cuentaminas realiza un paso previo que consiste en contar para cada celda
@@ -49,10 +49,10 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                 }
                 arrayBotones[i][j].numeroMinasAlrededor = minas;
                 minas = 0;
-                if ((arrayBotones[i][j].numeroMinasAlrededor > 0) &&
-                    (arrayBotones[i][j].bomba == 0)){
-                    arrayBotones[i][j].setText(String.valueOf(arrayBotones[i][j].numeroMinasAlrededor));
-                }
+                //if ((arrayBotones[i][j].numeroMinasAlrededor > 0) &&
+                 //  (arrayBotones[i][j].bomba == 0)){
+                  //  arrayBotones[i][j].setText(String.valueOf(arrayBotones[i][j].numeroMinasAlrededor));
+                //}
             }
         }
         
@@ -97,7 +97,12 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
         if(e.getButton() == MouseEvent.BUTTON3){
             miBoton.setText("?");
         }
+        //si es bomba explota y sale una X
+        else if (miBoton.bomba==1) {
+             miBoton.setText("X");
+        }
         else{
+       
             //si es una bomba --> explota y se acaba la partida
             
             //declaro un arraylist para ir guardando la lista de botones
@@ -105,7 +110,10 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
             ArrayList <Boton> listaDeCasillasAMirar = new ArrayList();
             //añado el botón que ha sido pulsado
             listaDeCasillasAMirar.add(miBoton);
-            
+           if (miBoton.numeroMinasAlrededor >0){
+               miBoton.setText(Integer.toString(miBoton.numeroMinasAlrededor));
+           }
+           else{
             while (listaDeCasillasAMirar.size() > 0){
                 Boton b = listaDeCasillasAMirar.get(0);
                 for (int k=-1; k<2; k++){
@@ -121,6 +129,10 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                                    arrayBotones[b.x + k][b.y + m].setEnabled(false);
                                    listaDeCasillasAMirar.add(arrayBotones[b.x + k][b.y + m]);
                                } 
+                               else {
+                                   arrayBotones[b.x + k][b.y + m].setText(Integer.toString (arrayBotones [b.x + k] [b.y + m].numeroMinasAlrededor));
+                                   arrayBotones[b.x + k][b.y + m].setEnabled(false);
+                               }
                             }
                         }    
                     }
@@ -128,9 +140,15 @@ public class VentanaBuscaminas extends javax.swing.JFrame {
                 listaDeCasillasAMirar.remove(b);
             }
             //si no, verificamos la casilla 
-            miBoton.setText("0");
+            //al clicar en una casilla si el numero es mayor que 0 lo escribe y sino no escribe nada
+            //if(miBoton.numeroMinasAlrededor>0){
+           // miBoton.setText(Integer.toString(miBoton.numeroMinasAlrededor));
+           // }
+           // else {
+             //       miBoton.setText("");
+                   // }
+           }
         }
-        
     }
     
     /**
