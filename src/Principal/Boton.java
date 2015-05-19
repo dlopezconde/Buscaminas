@@ -5,7 +5,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author Jorge Cisneros
+ * @author Daniel López
  * La clase botón almacena si es una bomba o no
  * y la posición (x,y) en el array
  */

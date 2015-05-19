@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  *
- * @author Javier González
+ * @author Daniel López
  */
 public class VentanaBuscaminas extends javax.swing.JFrame {
 
